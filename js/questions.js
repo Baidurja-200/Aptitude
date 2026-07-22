@@ -1305,9 +1305,9 @@ function generateTest(difficulty, categories = [], testDomains = []) {
   // Add domain questions as separate sections at the end
   if (testDomains && testDomains.length > 0) {
     testDomains.forEach(domain => {
-      // Pick 5 random questions for the domain
+      // Pick 10 random questions for the domain
       const domainPool = shuffleArray(QUESTIONS.filter(q => q.category === domain));
-      const selectedDomainQs = domainPool.slice(0, Math.min(5, domainPool.length));
+      const selectedDomainQs = domainPool.slice(0, Math.min(10, domainPool.length));
       
       selectedDomainQs.forEach(q => {
         // We use a clone to avoid mutating the original object permanently 
