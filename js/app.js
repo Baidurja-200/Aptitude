@@ -372,12 +372,29 @@ const App = {
     document.getElementById('totalQNum').textContent = total;
     document.getElementById('questionText').textContent = q.question;
 
+    // Section Header
+    const sectionHeader = document.getElementById('sectionHeader');
+    if (q.section) {
+      sectionHeader.style.display = 'block';
+      sectionHeader.textContent = q.section + ' Section';
+      sectionHeader.style.background = 'rgba(99, 102, 241, 0.1)';
+      sectionHeader.style.color = 'var(--primary)';
+      sectionHeader.style.borderLeft = '4px solid var(--primary)';
+      if (q.section !== 'General Aptitude') {
+        sectionHeader.style.background = 'rgba(245, 158, 11, 0.1)';
+        sectionHeader.style.color = '#d97706';
+        sectionHeader.style.borderLeft = '4px solid #f59e0b';
+      }
+    } else {
+      sectionHeader.style.display = 'none';
+    }
+
     // Tags
     const tagsEl = document.getElementById('questionTags');
     const diffBadge = `badge-${q.difficulty}`;
     tagsEl.innerHTML = `
       <span class="badge ${diffBadge}">${q.difficulty}</span>
-      <span class="badge badge-info">${CATEGORIES[q.category]?.icon || ''} ${q.topic}</span>
+      <span class="badge badge-info">${CATEGORIES[q.category]?.icon || ''} ${q.topic || CATEGORIES[q.category]?.name || q.category}</span>
     `;
 
     // Options

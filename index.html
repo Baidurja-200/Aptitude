@@ -265,7 +265,6 @@
           <button class="category-chip" data-cat="data" onclick="App.toggleCategory('data')">📊 Data Interpretation</button>
         </div>
       </div>
-
       <!-- Domain Filters -->
       <div class="glass-card" style="margin-top: 16px;">
         <h4 style="margin-bottom: 12px;">Include Specialization Domains <span class="text-muted" style="font-size:0.85rem;font-weight:400;">(optional)</span></h4>
@@ -275,8 +274,9 @@
           <button class="category-chip" data-domain="operations" onclick="App.toggleDomain('operations')">⚙️ Operations</button>
           <button class="category-chip" data-domain="marketing" onclick="App.toggleDomain('marketing')">📢 Marketing</button>
         </div>
-        <p class="text-muted" style="font-size:0.85rem;margin-top:8px;">Selected domains will be added alongside the general aptitude questions.</p>
+        <p class="text-muted" style="font-size:0.85rem;margin-top:8px;">5 high-quality industry standard questions per selected domain will be added as a separate section in the test.</p>
       </div>
+
 
       <div class="text-center" style="margin-top: 32px;">
         <button class="btn btn-primary btn-lg" id="startTestBtn" onclick="App.startTest()" disabled>
@@ -294,6 +294,11 @@
         <!-- Question Panel -->
         <div class="question-panel">
           <div class="glass-card">
+            <!-- Section Header -->
+            <div id="sectionHeader" style="background: rgba(99, 102, 241, 0.1); color: var(--primary); border-left: 4px solid var(--primary); padding: 8px 16px; border-radius: 4px; margin-bottom: 16px; font-weight: 600; display: none;">
+              Section Name
+            </div>
+            
             <div class="question-header">
               <div class="question-counter">
                 Question <span id="currentQNum">1</span> of <span id="totalQNum">15</span>

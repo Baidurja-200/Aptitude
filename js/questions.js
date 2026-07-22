@@ -1110,101 +1110,67 @@ const QUESTIONS = [
     explanation: "10 values (even count). Median = average of 5th and 6th values = (70+75)/2 = 72.5."
   },
   
+
   // =============================================
-  //  DOMAIN-SPECIFIC QUESTIONS
+  //  DOMAIN-SPECIFIC QUESTIONS (INDUSTRY STANDARD)
   // =============================================
   
   // ANALYTICS
-  {
-    id: 152, category: "analytics", difficulty: "easy", topic: "Data Manipulation",
-    question: "Which of the following is typically used in SQL to filter rows after grouping?",
-    options: ["HAVING", "WHERE", "ORDER BY", "GROUP BY"],
-    correctAnswer: 0,
-    explanation: "The HAVING clause is used to filter records that work on summarized GROUP BY results."
-  },
-  {
-    id: 153, category: "analytics", difficulty: "moderate", topic: "Probability",
-    question: "A company sends 1000 emails. The open rate is 20%. Of those who open, 10% click a link. How many clicks?",
-    options: ["20", "200", "10", "100"],
-    correctAnswer: 0,
-    explanation: "Opened = 20% of 1000 = 200. Clicked = 10% of 200 = 20."
-  },
-  {
-    id: 154, category: "analytics", difficulty: "difficult", topic: "Statistics",
-    question: "If the variance of a dataset is 144, what is the standard deviation?",
-    options: ["12", "144", "72", "24"],
-    correctAnswer: 0,
-    explanation: "Standard deviation is the square root of the variance. sqrt(144) = 12."
-  },
-  
+  { id: 201, category: "analytics", difficulty: "easy", topic: "Data Analysis", question: "Which of the following is the most appropriate use case for a scatter plot?", options: ["Showing the distribution of a single variable", "Comparing parts of a whole", "Visualizing the correlation between two continuous variables", "Displaying a trend over time for a single metric"], correctAnswer: 2, explanation: "Scatter plots are specifically designed to show how much one variable is affected by another, highlighting the correlation between them." },
+  { id: 202, category: "analytics", difficulty: "easy", topic: "SQL Basics", question: "In SQL, which clause is used to filter the results of an aggregation (e.g., COUNT > 5)?", options: ["WHERE", "HAVING", "GROUP BY", "ORDER BY"], correctAnswer: 1, explanation: "The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions." },
+  { id: 203, category: "analytics", difficulty: "easy", topic: "Metrics", question: "What does 'Bounce Rate' measure in web analytics?", options: ["Percentage of users who navigate away after viewing only one page", "Rate at which emails are undeliverable", "The speed at which a webpage loads", "Percentage of users who make a purchase"], correctAnswer: 0, explanation: "Bounce rate represents the percentage of visitors who enter the site and then leave rather than continuing to view other pages." },
+  { id: 204, category: "analytics", difficulty: "easy", topic: "Probability", question: "If a fair coin is flipped 3 times, what is the probability of getting exactly 3 heads?", options: ["1/2", "1/4", "1/8", "1/6"], correctAnswer: 2, explanation: "The probability of getting heads on a single flip is 1/2. (1/2) * (1/2) * (1/2) = 1/8." },
+  { id: 205, category: "analytics", difficulty: "moderate", topic: "Statistics", question: "In a negatively skewed distribution, what is the typical relationship between the mean, median, and mode?", options: ["Mean < Median < Mode", "Mean > Median > Mode", "Mean = Median = Mode", "Mode < Mean < Median"], correctAnswer: 0, explanation: "In a left-skewed (negatively skewed) distribution, the tail on the left side is longer, which pulls the mean to the left (Mean < Median < Mode)." },
+  { id: 206, category: "analytics", difficulty: "moderate", topic: "Machine Learning", question: "Which algorithm is an example of unsupervised learning?", options: ["Linear Regression", "Random Forest", "K-Means Clustering", "Support Vector Machines"], correctAnswer: 2, explanation: "K-Means is an unsupervised learning algorithm used to categorize unlabeled data into different groups or clusters." },
+  { id: 207, category: "analytics", difficulty: "moderate", topic: "Data Transformation", question: "What is the primary purpose of One-Hot Encoding?", options: ["Handling missing numerical data", "Normalizing skewed distributions", "Converting categorical data into numerical format for ML algorithms", "Reducing the dimensionality of a dataset"], correctAnswer: 2, explanation: "One-Hot Encoding transforms categorical variables into binary vectors, allowing machine learning models to process them." },
+  { id: 208, category: "analytics", difficulty: "moderate", topic: "A/B Testing", question: "When conducting an A/B test, what does a p-value of 0.02 indicate (assuming a significance level of 0.05)?", options: ["The result is not statistically significant.", "There is a 2% chance that the difference is due to random variance, making it statistically significant.", "The new variant is 2% better than the control.", "You should discard the test."], correctAnswer: 1, explanation: "A p-value < 0.05 implies strong evidence against the null hypothesis, meaning the result is statistically significant." },
+  { id: 209, category: "analytics", difficulty: "difficult", topic: "Advanced SQL", question: "Which window function assigns a unique sequential integer to rows within a partition of a result set, with no gaps for ties?", options: ["RANK()", "DENSE_RANK()", "ROW_NUMBER()", "NTILE()"], correctAnswer: 2, explanation: "ROW_NUMBER() assigns a unique number to each row regardless of ties. RANK and DENSE_RANK assign the same number to tied rows." },
+  { id: 210, category: "analytics", difficulty: "difficult", topic: "Data Engineering", question: "What is a 'Star Schema' in a data warehouse?", options: ["A structure consisting of a central fact table connected to multiple dimension tables", "A graph database topology", "A highly normalized schema in 3NF", "A method for securing data at rest"], correctAnswer: 0, explanation: "A star schema resembles a star, with a central fact table surrounded by and connected to multiple dimension tables." },
+  { id: 211, category: "analytics", difficulty: "difficult", topic: "Machine Learning", question: "In the context of the Bias-Variance tradeoff, an overly complex model that perfectly memorizes the training data but performs poorly on new data is suffering from:", options: ["High Bias, High Variance", "High Bias, Low Variance", "Low Bias, High Variance", "Low Bias, Low Variance"], correctAnswer: 2, explanation: "Overfitting occurs when a model captures the noise along with the underlying pattern, leading to low bias on training data but high variance on unseen data." },
+  { id: 212, category: "analytics", difficulty: "difficult", topic: "Statistics", question: "What happens to the standard error of the mean as the sample size increases?", options: ["It increases linearly", "It decreases", "It remains constant", "It approaches infinity"], correctAnswer: 1, explanation: "The standard error is inversely proportional to the square root of the sample size, so it decreases as the sample size increases." },
+
   // FINANCE
-  {
-    id: 155, category: "finance", difficulty: "easy", topic: "Accounting Basics",
-    question: "Which financial statement reports a company's financial performance over a specific accounting period?",
-    options: ["Income Statement", "Balance Sheet", "Cash Flow Statement", "Statement of Retained Earnings"],
-    correctAnswer: 0,
-    explanation: "The Income Statement shows revenues and expenses over a specific period."
-  },
-  {
-    id: 156, category: "finance", difficulty: "moderate", topic: "Financial Metrics",
-    question: "If a company has a net income of $50,000 and total equity of $250,000, what is its Return on Equity (ROE)?",
-    options: ["20%", "5%", "25%", "15%"],
-    correctAnswer: 0,
-    explanation: "ROE = Net Income / Total Equity = 50000 / 250000 = 0.20 or 20%."
-  },
-  {
-    id: 157, category: "finance", difficulty: "difficult", topic: "Valuation",
-    question: "What is the present value of $1,100 to be received one year from now, if the discount rate is 10%?",
-    options: ["$1,000", "$1,210", "$990", "$1,100"],
-    correctAnswer: 0,
-    explanation: "PV = FV / (1 + r)^n = 1100 / (1 + 0.10)^1 = 1100 / 1.10 = 1000."
-  },
-  
+  { id: 213, category: "finance", difficulty: "easy", topic: "Accounting", question: "Which of the following equations represents the fundamental accounting equation?", options: ["Assets = Liabilities - Equity", "Assets = Liabilities + Equity", "Equity = Assets + Liabilities", "Liabilities = Assets + Revenue"], correctAnswer: 1, explanation: "The fundamental accounting equation states that a company's total assets are equal to the sum of its liabilities and shareholders' equity." },
+  { id: 214, category: "finance", difficulty: "easy", topic: "Corporate Finance", question: "What does EBITDA stand for?", options: ["Earnings Before Interest, Taxes, Depreciation, and Amortization", "Equity Before Income, Taxes, Debt, and Assets", "Earnings By Internal Trading, Dividends, and Acquisitions", "Estimated Budget Including Taxes, Depreciation, and Assets"], correctAnswer: 0, explanation: "EBITDA is a measure of a company's overall financial performance and is used as an alternative to net income in some circumstances." },
+  { id: 215, category: "finance", difficulty: "easy", topic: "Valuation", question: "If you invest $1,000 today at an annual interest rate of 5%, what will be the future value in 1 year?", options: ["$1,050", "$1,005", "$1,500", "$950"], correctAnswer: 0, explanation: "FV = PV * (1 + r)^n = $1000 * (1.05)^1 = $1050." },
+  { id: 216, category: "finance", difficulty: "easy", topic: "Working Capital", question: "Net Working Capital is calculated as:", options: ["Current Assets + Current Liabilities", "Total Assets - Total Liabilities", "Current Assets - Current Liabilities", "Cash + Accounts Receivable"], correctAnswer: 2, explanation: "Net Working Capital is the difference between a company's current assets and current liabilities." },
+  { id: 217, category: "finance", difficulty: "moderate", topic: "Valuation", question: "What is the present value of $1,210 to be received 2 years from now, discounted at 10% annually?", options: ["$1,000", "$1,100", "$1,210", "$900"], correctAnswer: 0, explanation: "PV = FV / (1 + r)^n = 1210 / (1.10)^2 = 1210 / 1.21 = $1,000." },
+  { id: 218, category: "finance", difficulty: "moderate", topic: "Corporate Finance", question: "WACC (Weighted Average Cost of Capital) represents:", options: ["The minimum acceptable rate of return on a new investment", "The total amount of debt a company owes", "The average interest rate paid on a company's bonds", "The dividend yield of a company's stock"], correctAnswer: 0, explanation: "WACC is the blended cost of debt and equity and serves as the hurdle rate for investment decisions." },
+  { id: 219, category: "finance", difficulty: "moderate", topic: "Accounting", question: "If a company has a quick ratio of 0.8, what does it signify?", options: ["The company has $0.80 of highly liquid assets for every $1 of current liabilities.", "The company can pay all its debts immediately.", "The company's inventory is turning over very quickly.", "The company has high long-term debt."], correctAnswer: 0, explanation: "The quick ratio measures the ability to pay short-term obligations using highly liquid assets (excluding inventory)." },
+  { id: 220, category: "finance", difficulty: "moderate", topic: "Markets", question: "A 'Short Squeeze' occurs when:", options: ["A stock's price drops suddenly due to poor earnings.", "Short sellers are forced to buy shares to cover their positions, driving the price up rapidly.", "The government increases interest rates, tightening money supply.", "A company repurchases its own shares to reduce float."], correctAnswer: 1, explanation: "A short squeeze forces short sellers to buy back borrowed shares, causing an upward spiral in the stock's price." },
+  { id: 221, category: "finance", difficulty: "difficult", topic: "Corporate Finance", question: "Which component is NOT typically part of the CAPM (Capital Asset Pricing Model) formula?", options: ["Risk-Free Rate", "Beta", "Market Risk Premium", "Dividend Growth Rate"], correctAnswer: 3, explanation: "CAPM = Risk-Free Rate + Beta * (Market Return - Risk-Free Rate). Dividend Growth Rate is used in the Gordon Growth Model." },
+  { id: 222, category: "finance", difficulty: "difficult", topic: "Derivatives", question: "A 'Put Option' gives the holder:", options: ["The obligation to buy the underlying asset", "The right, but not the obligation, to sell the underlying asset", "The right, but not the obligation, to buy the underlying asset", "The obligation to sell the underlying asset"], correctAnswer: 1, explanation: "A put option grants the right to sell an asset at a specified strike price within a specific timeframe." },
+  { id: 223, category: "finance", difficulty: "difficult", topic: "Valuation", question: "What is Terminal Value in a DCF (Discounted Cash Flow) analysis?", options: ["The liquidation value of a company's hard assets", "The present value of all cash flows beyond the explicit forecast period", "The net present value of the first 5 years of cash flows", "The book value of equity at the end of the year"], correctAnswer: 1, explanation: "Terminal value captures the value of a business beyond the projection period, assuming it continues to generate cash flows indefinitely." },
+  { id: 224, category: "finance", difficulty: "difficult", topic: "Accounting", question: "If depreciation expense increases by $10, assuming a 30% tax rate, how is cash flow affected?", options: ["Cash flow decreases by $10", "Cash flow increases by $10", "Cash flow increases by $3", "Cash flow decreases by $7"], correctAnswer: 2, explanation: "Depreciation reduces pre-tax income by $10, which reduces taxes by $3 (30% of 10). Since depreciation is non-cash, the net effect is a cash flow increase of $3 (the tax shield)." },
+
   // OPERATIONS
-  {
-    id: 158, category: "operations", difficulty: "easy", topic: "Supply Chain",
-    question: "What does 'JIT' stand for in inventory management?",
-    options: ["Just In Time", "Jump In Transit", "Joint Inventory Tracking", "Job Instruction Training"],
-    correctAnswer: 0,
-    explanation: "JIT stands for Just-In-Time, an inventory strategy to increase efficiency and decrease waste."
-  },
-  {
-    id: 159, category: "operations", difficulty: "moderate", topic: "Process Optimization",
-    question: "In a manufacturing process, if the bottleneck station has a capacity of 50 units/hour, what is the maximum capacity of the entire line?",
-    options: ["50 units/hour", "Depends on other stations", "More than 50 units/hour", "Cannot determine"],
-    correctAnswer: 0,
-    explanation: "The throughput of any system is determined by its bottleneck. Therefore, the maximum capacity is 50 units/hour."
-  },
-  {
-    id: 160, category: "operations", difficulty: "difficult", topic: "Inventory Math",
-    question: "Using the EOQ (Economic Order Quantity) model, if annual demand is 1000 units, ordering cost is $10 per order, and holding cost is $2 per unit per year, what is the EOQ?",
-    options: ["100", "200", "50", "141"],
-    correctAnswer: 0,
-    explanation: "EOQ = sqrt((2 * D * S) / H) = sqrt((2 * 1000 * 10) / 2) = sqrt(10000) = 100."
-  },
-  
+  { id: 225, category: "operations", difficulty: "easy", topic: "Inventory Management", question: "What does 'FIFO' stand for?", options: ["First In, First Out", "Fast Inventory, Fast Order", "Finished Items, Forward Optimization", "First Issue, Final Output"], correctAnswer: 0, explanation: "FIFO is an inventory valuation method where the oldest items are sold or used first." },
+  { id: 226, category: "operations", difficulty: "easy", topic: "Quality Control", question: "Six Sigma methodology primarily aims to:", options: ["Increase inventory levels", "Reduce process variation and defects", "Maximize marketing spend", "Outsource production completely"], correctAnswer: 1, explanation: "Six Sigma focuses on process improvement by identifying and removing the causes of defects and minimizing variability." },
+  { id: 227, category: "operations", difficulty: "easy", topic: "Supply Chain", question: "What is a 'Bottleneck' in a manufacturing process?", options: ["The stage with the highest capacity", "The stage that limits the overall throughput of the system", "A container used for liquid storage", "The final inspection stage"], correctAnswer: 1, explanation: "A bottleneck is the slowest or most constrained stage in a process, dictating the maximum output of the entire line." },
+  { id: 228, category: "operations", difficulty: "easy", topic: "Lean Manufacturing", question: "Which lean manufacturing term refers to continuous, incremental improvement?", options: ["Kanban", "Kaizen", "Muda", "Poka-Yoke"], correctAnswer: 1, explanation: "Kaizen is a Japanese business philosophy focusing on continuous, small improvements involving all employees." },
+  { id: 229, category: "operations", difficulty: "moderate", topic: "Inventory Math", question: "Using the EOQ model: Annual demand (D) = 4000, Ordering cost (S) = $20, Holding cost (H) = $1. What is the Economic Order Quantity?", options: ["200", "400", "800", "1600"], correctAnswer: 1, explanation: "EOQ = sqrt((2 * D * S) / H) = sqrt((2 * 4000 * 20) / 1) = sqrt(160000) = 400." },
+  { id: 230, category: "operations", difficulty: "moderate", topic: "Logistics", question: "What does the 'Bullwhip Effect' describe in a supply chain?", options: ["Decreased transportation costs over time", "Small fluctuations in retail demand causing larger fluctuations upstream in the supply chain", "The speed at which goods move from factory to store", "The bargaining power of suppliers"], correctAnswer: 1, explanation: "The bullwhip effect refers to the magnification of demand fluctuations as orders move up the supply chain." },
+  { id: 231, category: "operations", difficulty: "moderate", topic: "Project Management", question: "In a PERT chart, the 'Critical Path' represents:", options: ["The sequence of tasks that takes the shortest time", "The sequence of tasks that determines the minimum completion time of the project", "Tasks that require the most budget", "Tasks that can be delayed without affecting the deadline"], correctAnswer: 1, explanation: "The critical path is the longest sequence of dependent tasks, meaning any delay on this path delays the entire project." },
+  { id: 232, category: "operations", difficulty: "moderate", topic: "Manufacturing", question: "Takt time is defined as:", options: ["The time it takes a machine to complete one cycle", "The available production time divided by customer demand", "The time it takes to deliver goods to a customer", "The time required to change over a machine"], correctAnswer: 1, explanation: "Takt time is the pace at which products must be produced to meet customer demand." },
+  { id: 233, category: "operations", difficulty: "difficult", topic: "Inventory Math", question: "If the lead time is 5 days and average daily demand is 20 units, what should the Reorder Point (ROP) be, assuming zero safety stock?", options: ["100 units", "20 units", "25 units", "200 units"], correctAnswer: 0, explanation: "ROP = Lead Time * Average Daily Demand = 5 * 20 = 100 units." },
+  { id: 234, category: "operations", difficulty: "difficult", topic: "Quality Control", question: "In statistical process control (SPC), if points on a control chart fall outside the upper or lower control limits, the process is considered:", options: ["In statistical control", "Out of control (assignable cause variation)", "Subject to natural (common cause) variation only", "Over-engineered"], correctAnswer: 1, explanation: "Points outside control limits indicate that special or assignable causes of variation are present, and the process is unstable." },
+  { id: 235, category: "operations", difficulty: "difficult", topic: "Supply Chain", question: "Which metric calculates the percentage of orders delivered completely and accurately to the customer on time?", options: ["Fill Rate", "Perfect Order Rate", "Cash-to-Cash Cycle Time", "Inventory Turnover"], correctAnswer: 1, explanation: "Perfect Order Rate measures the flawlessness of supply chain execution from order receipt to delivery." },
+  { id: 236, category: "operations", difficulty: "difficult", topic: "Capacity Planning", question: "A facility operates 3 shifts of 8 hours, 5 days a week. Its design capacity is 1200 units/week. Its effective capacity is 1000 units/week. If actual output is 900 units, what is the Utilization?", options: ["75%", "90%", "100%", "83.3%"], correctAnswer: 0, explanation: "Utilization = Actual Output / Design Capacity = 900 / 1200 = 0.75 or 75%. (Efficiency would be 900 / 1000 = 90%)." },
+
   // MARKETING
-  {
-    id: 161, category: "marketing", difficulty: "easy", topic: "Digital Marketing",
-    question: "What does SEO stand for?",
-    options: ["Search Engine Optimization", "Sales Engagement Operations", "Social Enterprise Organization", "Secure Endpoint Operation"],
-    correctAnswer: 0,
-    explanation: "SEO stands for Search Engine Optimization, the process of improving a website's visibility in search engines."
-  },
-  {
-    id: 162, category: "marketing", difficulty: "moderate", topic: "Metrics",
-    question: "If an ad campaign costs $500 and generates 10,000 impressions and 200 clicks, what is the Cost Per Click (CPC)?",
-    options: ["$2.50", "$0.05", "$5.00", "$0.50"],
-    correctAnswer: 0,
-    explanation: "CPC = Total Cost / Total Clicks = 500 / 200 = $2.50."
-  },
-  {
-    id: 163, category: "marketing", difficulty: "difficult", topic: "Strategy",
-    question: "In the context of the BCG Matrix, what is a 'Cash Cow'?",
-    options: ["High market share, low market growth", "High market share, high market growth", "Low market share, high market growth", "Low market share, low market growth"],
-    correctAnswer: 0,
-    explanation: "A Cash Cow is a product with high market share in a slow-growing industry."
-  }
+  { id: 237, category: "marketing", difficulty: "easy", topic: "Strategy", question: "What are the traditional '4 Ps' of the Marketing Mix?", options: ["Product, Price, Place, Promotion", "People, Process, Physical Evidence, Performance", "Planning, Pricing, Publishing, Promoting", "Product, Placement, Publicity, Packaging"], correctAnswer: 0, explanation: "The standard 4 Ps proposed by E. Jerome McCarthy are Product, Price, Place, and Promotion." },
+  { id: 238, category: "marketing", difficulty: "easy", topic: "Digital Marketing", question: "What does CTR stand for in digital advertising?", options: ["Cost Through Ratio", "Click-Through Rate", "Customer Target Reach", "Campaign Time Return"], correctAnswer: 1, explanation: "CTR stands for Click-Through Rate, which is the ratio of users who click on a specific link to the number of total users who view a page, email, or advertisement." },
+  { id: 239, category: "marketing", difficulty: "easy", topic: "Branding", question: "A 'Brand Persona' refers to:", options: ["The legal copyright of a logo", "The human characteristics associated with a brand", "The total financial value of a brand", "The specific demographic a brand targets"], correctAnswer: 1, explanation: "Brand persona is the collection of personality traits, attitudes, and values that a brand projects to its audience." },
+  { id: 240, category: "marketing", difficulty: "easy", topic: "Sales Funnel", question: "At the top of the standard marketing funnel (TOFU), the primary goal is usually:", options: ["Conversion", "Loyalty", "Awareness", "Advocacy"], correctAnswer: 2, explanation: "The top of the funnel focuses on brand awareness and attracting a large audience of potential prospects." },
+  { id: 241, category: "marketing", difficulty: "moderate", topic: "Metrics", question: "If Customer Acquisition Cost (CAC) is $50 and the Customer Lifetime Value (CLTV) is $150, what is the LTV:CAC ratio?", options: ["1:3", "3:1", "0.33", "100"], correctAnswer: 1, explanation: "LTV:CAC ratio is 150 / 50 = 3, usually expressed as 3:1." },
+  { id: 242, category: "marketing", difficulty: "moderate", topic: "Strategy", question: "In the BCG Matrix, a product with high market share in a fast-growing industry is a:", options: ["Dog", "Question Mark", "Star", "Cash Cow"], correctAnswer: 2, explanation: "Stars have a high market share in a rapidly growing industry and often require heavy investment to sustain growth." },
+  { id: 243, category: "marketing", difficulty: "moderate", topic: "Consumer Behavior", question: "Cognitive Dissonance in consumer behavior refers to:", options: ["The inability to afford a product", "The psychological discomfort a buyer feels immediately after a major purchase", "Ignoring advertisements automatically", "The tendency to buy only familiar brands"], correctAnswer: 1, explanation: "Post-purchase cognitive dissonance is the tension or doubt a consumer feels after making a decision, wondering if they made the right choice." },
+  { id: 244, category: "marketing", difficulty: "moderate", topic: "Digital Marketing", question: "What is 'Retargeting'?", options: ["Changing a brand's logo", "Serving ads to users who have previously visited your website", "Targeting a completely new demographic", "Lowering prices to attract budget buyers"], correctAnswer: 1, explanation: "Retargeting uses cookies to track website visitors and display ads to them as they browse other sites." },
+  { id: 245, category: "marketing", difficulty: "difficult", topic: "Metrics", question: "Which metric calculates the percentage of customers who stop subscribing to a service in a given period?", options: ["Retention Rate", "Churn Rate", "Bounce Rate", "Engagement Rate"], correctAnswer: 1, explanation: "Churn Rate represents the proportion of contractual customers or subscribers who leave a supplier during a given time period." },
+  { id: 246, category: "marketing", difficulty: "difficult", topic: "Strategy", question: "Porter's Five Forces framework is used primarily to analyze:", options: ["Internal company culture", "The competitive intensity and attractiveness of an industry", "Employee turnover rates", "Supply chain logistical routes"], correctAnswer: 1, explanation: "Porter's Five Forces helps assess the microenvironment to determine the profitability and competition within an industry." },
+  { id: 247, category: "marketing", difficulty: "difficult", topic: "Pricing Strategy", question: "What is 'Price Skimming'?", options: ["Setting a low initial price to capture market share quickly", "Matching the prices of competitors exactly", "Setting a high initial price that lowers over time as demand from early adopters is satisfied", "Selling products below cost to drive competitors out of business"], correctAnswer: 2, explanation: "Price skimming involves launching at a high price to maximize revenue from willing buyers before gradually lowering it." },
+  { id: 248, category: "marketing", difficulty: "difficult", topic: "SEO", question: "In SEO, what is the primary purpose of a 'canonical tag'?", options: ["To speed up page loading", "To tell search engines which version of a URL is the master copy, preventing duplicate content issues", "To apply styling to text", "To track user behavior on the page"], correctAnswer: 1, explanation: "A canonical tag (rel="canonical") resolves duplicate content issues by specifying the preferred URL for search engines to index." }
+
 ];
 
 // Category metadata
@@ -1287,17 +1253,6 @@ const DIFFICULTIES = {
   }
 };
 
-// Helper: get questions by filters
-function getFilteredQuestions(difficulty, categories = [], profileDomains = []) {
-  let allowedCategories = ['quantitative', 'logical', 'verbal', 'data', ...profileDomains];
-  if (categories.length > 0) {
-    allowedCategories = categories; // User explicitly selected some categories
-  }
-  
-  let filtered = QUESTIONS.filter(q => q.difficulty === difficulty && allowedCategories.includes(q.category));
-  return shuffleArray(filtered);
-}
-
 // Helper: shuffle array (Fisher-Yates)
 function shuffleArray(arr) {
   const shuffled = [...arr];
@@ -1308,9 +1263,60 @@ function shuffleArray(arr) {
   return shuffled;
 }
 
-// Helper: pick N questions for a test
-function generateTest(difficulty, categories = [], profileDomains = []) {
+// Helper: pick N questions for a test (balanced across categories)
+function generateTest(difficulty, categories = [], testDomains = []) {
   const count = DIFFICULTIES[difficulty].questions;
-  const pool = getFilteredQuestions(difficulty, categories, profileDomains);
-  return pool.slice(0, Math.min(count, pool.length));
+  let allowedCategories = ['quantitative', 'logical', 'verbal', 'data'];
+  if (categories.length > 0) {
+    allowedCategories = categories;
+  }
+  
+  // Group available questions by category
+  const poolByCategory = {};
+  allowedCategories.forEach(cat => {
+    poolByCategory[cat] = shuffleArray(QUESTIONS.filter(q => q.difficulty === difficulty && q.category === cat));
+  });
+
+  const selectedQuestions = [];
+  let remainingCount = count;
+  
+  // Distribute questions evenly
+  while (remainingCount > 0) {
+    let addedInRound = 0;
+    // Iterate in random order to distribute the remainder randomly
+    const randomCats = shuffleArray(allowedCategories);
+    for (const cat of randomCats) {
+      if (remainingCount === 0) break;
+      if (poolByCategory[cat].length > 0) {
+        const q = poolByCategory[cat].pop();
+        q.section = "General Aptitude";
+        selectedQuestions.push(q);
+        remainingCount--;
+        addedInRound++;
+      }
+    }
+    // If no questions were added in a full round, it means all pools are empty
+    if (addedInRound === 0) break;
+  }
+  
+  // Shuffle final list so categories are mixed during test
+  const finalQuestions = shuffleArray(selectedQuestions);
+
+  // Add domain questions as separate sections at the end
+  if (testDomains && testDomains.length > 0) {
+    testDomains.forEach(domain => {
+      // Pick 5 random questions for the domain
+      const domainPool = shuffleArray(QUESTIONS.filter(q => q.category === domain));
+      const selectedDomainQs = domainPool.slice(0, Math.min(5, domainPool.length));
+      
+      selectedDomainQs.forEach(q => {
+        // We use a clone to avoid mutating the original object permanently 
+        // if generateTest is called multiple times.
+        const qCopy = { ...q, section: CATEGORIES[domain].name };
+        finalQuestions.push(qCopy);
+      });
+    });
+  }
+
+  return finalQuestions;
 }
