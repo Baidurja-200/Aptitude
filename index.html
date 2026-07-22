@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AptitudeAce — Practice aptitude tests for placement preparation. Track your progress, identify weak areas, and ace your campus placements.">
+  <title>AptitudeAce — Crack Your Placement Aptitude</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+</head>
+<body>
+
+<div class="app-container" id="app">
+
+  <!-- ======== NAVIGATION ======== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-brand" onclick="App.navigate('landing')">
+        <div class="brand-icon">🎯</div>
+        <span class="text-gradient">AptitudeAce</span>
+      </div>
+      <button class="nav-toggle" id="navToggle" onclick="App.toggleNav()">☰</button>
+      <div class="navbar-links" id="navLinks">
+        <button class="nav-link" data-view="dashboard" onclick="App.navigate('dashboard')">Dashboard</button>
+        <button class="nav-link" data-view="test-config" onclick="App.navigate('test-config')">Practice</button>
+        <button class="nav-link" data-view="analytics" onclick="App.navigate('analytics')">Analytics</button>
+        <div class="nav-avatar" id="navAvatar" onclick="App.navigate('profile')" title="Profile"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======== TOAST CONTAINER ======== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ======== VIEW: LANDING ======== -->
+  <section class="view active" id="view-landing">
+    <div class="container">
+      <div class="landing-hero">
+        <h1><span class="text-gradient">Master Aptitude.</span><br>Crack Placements.</h1>
+        <p class="subtitle">Practice with 150+ curated questions across Quantitative, Logical, Verbal, and Data Interpretation — designed for campus placement success.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary btn-lg" onclick="App.getStarted()">
+            🚀 Get Started Free
+          </button>
+          <button class="btn btn-secondary btn-lg" onclick="App.navigate('test-config')">
+            ▶ Take a Practice Test
+          </button>
+        </div>
+      </div>
+
+      <div class="features-grid stagger">
+        <div class="glass-card feature-card animate-fade-in-up">
+          <div class="feature-icon">📝</div>
+          <h4>150+ Questions</h4>
+          <p>Curated aptitude questions covering all major topics asked in placement drives.</p>
+        </div>
+        <div class="glass-card feature-card animate-fade-in-up">
+          <div class="feature-icon">🎯</div>
+          <h4>3 Difficulty Levels</h4>
+          <p>Easy, Moderate, and Difficult modes to match your preparation stage.</p>
+        </div>
+        <div class="glass-card feature-card animate-fade-in-up">
+          <div class="feature-icon">📊</div>
+          <h4>Smart Analytics</h4>
+          <p>Track progress, spot weak areas, and get actionable insights to improve.</p>
+        </div>
+        <div class="glass-card feature-card animate-fade-in-up">
+          <div class="feature-icon">💡</div>
+          <h4>Detailed Solutions</h4>
+          <p>Every question comes with step-by-step explanations to deepen understanding.</p>
+        </div>
+      </div>
+
+      <div class="stats-strip">
+        <div>
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Questions</div>
+        </div>
+        <div>
+          <div class="stat-number">4</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div>
+          <div class="stat-number">3</div>
+          <div class="stat-label">Difficulty Levels</div>
+        </div>
+        <div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Free Forever</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VIEW: PROFILE SETUP ======== -->
+  <section class="view" id="view-profile-setup">
+    <div class="container-narrow" style="padding-top: 48px; padding-bottom: 48px;">
+      <div class="glass-card">
+        <h2 style="margin-bottom: 8px;">Create Your Profile</h2>
+        <p class="text-secondary" style="margin-bottom: 32px;">Set up your profile to track your progress and personalize your experience.</p>
+
+        <form id="profileForm" onsubmit="App.saveProfile(event)">
+          <div class="form-group">
+            <label class="form-label" for="profileName">Full Name *</label>
+            <input type="text" class="form-input" id="profileName" placeholder="Enter your full name" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profileEmail">Email Address *</label>
+            <input type="email" class="form-input" id="profileEmail" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profileCollege">College / University</label>
+            <input type="text" class="form-input" id="profileCollege" placeholder="e.g., IIT Delhi, NIT Trichy">
+          </div>
+
+
+
+          <div class="form-group">
+            <label class="form-label">Target Companies</label>
+            <div class="tags-container" id="tagsContainer" onclick="document.getElementById('tagInput').focus()">
+              <input type="text" class="tags-input" id="tagInput" placeholder="Type a company name & press Enter"
+                     onkeydown="App.handleTagInput(event)">
+            </div>
+            <p class="text-muted" style="font-size:0.8rem;margin-top:4px;">Press Enter to add, click × to remove</p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-full" style="margin-top: 8px;">
+            ✨ Create Profile & Start
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VIEW: DASHBOARD ======== -->
+  <section class="view" id="view-dashboard">
+    <div class="container" style="padding-top: 32px; padding-bottom: 48px;">
+      <div class="dashboard-header">
+        <div class="greeting">
+          <h2>Welcome back, <span class="text-gradient" id="dashboardName">Student</span> 👋</h2>
+          <p class="text-secondary" id="dashboardSubtext">Ready to practice today?</p>
+        </div>
+        <button class="btn btn-primary" onclick="App.navigate('test-config')">
+          ▶ Start Practice Test
+        </button>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats" id="quickStats">
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon purple">🏆</div>
+          <div>
+            <div class="stat-value" id="statTotalTests">0</div>
+            <div class="stat-label">Tests Taken</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon blue">📈</div>
+          <div>
+            <div class="stat-value" id="statAvgScore">0%</div>
+            <div class="stat-label">Average Score</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon green">⭐</div>
+          <div>
+            <div class="stat-value" id="statBestScore">0%</div>
+            <div class="stat-label">Best Score</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon orange">🔥</div>
+          <div>
+            <div class="stat-value" id="statStreak">0</div>
+            <div class="stat-label">Day Streak</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Recent Tests -->
+        <div class="glass-card">
+          <div class="section-title">📋 Recent Tests</div>
+          <div id="recentTestsList">
+            <div class="empty-state">
+              <div class="empty-icon">📝</div>
+              <h4>No tests taken yet</h4>
+              <p>Start a practice test to see your history here.</p>
+              <button class="btn btn-primary" onclick="App.navigate('test-config')">Take First Test</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Insights -->
+        <div>
+          <div class="glass-card" style="margin-bottom: 16px;">
+            <div class="section-title">🎯 Quick Insights</div>
+            <div id="quickInsights">
+              <p class="text-secondary" style="font-size:0.9rem;">Complete a few tests to get personalized insights.</p>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="section-title">📊 Category Performance</div>
+            <div id="dashboardCategoryBars">
+              <p class="text-secondary" style="font-size:0.9rem;">Complete tests to see category breakdown.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VIEW: TEST CONFIG ======== -->
+  <section class="view" id="view-test-config">
+    <div class="container test-config-page">
+      <div class="text-center" style="margin-bottom: 16px;">
+        <h2>Choose Your <span class="text-gradient">Challenge</span></h2>
+        <p class="text-secondary">Select a difficulty level and customize your test.</p>
+      </div>
+
+      <!-- Difficulty Selection -->
+      <div class="difficulty-cards" id="difficultyCards">
+        <div class="glass-card glass-card-interactive difficulty-card easy" onclick="App.selectDifficulty('easy')">
+          <div class="diff-icon">🟢</div>
+          <h3>Easy</h3>
+          <span class="badge badge-easy">Beginner</span>
+          <div class="diff-meta">
+            <span>15 Questions</span>
+            <span>20 Minutes</span>
+          </div>
+          <p class="text-muted" style="font-size:0.85rem;margin-top:12px;">Build your foundation with fundamental aptitude questions.</p>
+        </div>
+        <div class="glass-card glass-card-interactive difficulty-card moderate" onclick="App.selectDifficulty('moderate')">
+          <div class="diff-icon">🟡</div>
+          <h3>Moderate</h3>
+          <span class="badge badge-moderate">Intermediate</span>
+          <div class="diff-meta">
+            <span>25 Questions</span>
+            <span>30 Minutes</span>
+          </div>
+          <p class="text-muted" style="font-size:0.85rem;margin-top:12px;">Interview-level questions for serious preparation.</p>
+        </div>
+        <div class="glass-card glass-card-interactive difficulty-card difficult" onclick="App.selectDifficulty('difficult')">
+          <div class="diff-icon">🔴</div>
+          <h3>Difficult</h3>
+          <span class="badge badge-difficult">Advanced</span>
+          <div class="diff-meta">
+            <span>35 Questions</span>
+            <span>40 Minutes</span>
+          </div>
+          <p class="text-muted" style="font-size:0.85rem;margin-top:12px;">Top-tier company questions. Only for the brave!</p>
+        </div>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="glass-card" style="margin-top: 16px;">
+        <h4 style="margin-bottom: 12px;">Filter by Category <span class="text-muted" style="font-size:0.85rem;font-weight:400;">(optional)</span></h4>
+        <div class="category-filters" id="categoryFilters">
+          <button class="category-chip active" data-cat="all" onclick="App.toggleCategory('all')">📚 All Categories</button>
+          <button class="category-chip" data-cat="quantitative" onclick="App.toggleCategory('quantitative')">📐 Quantitative</button>
+          <button class="category-chip" data-cat="logical" onclick="App.toggleCategory('logical')">🧩 Logical Reasoning</button>
+          <button class="category-chip" data-cat="verbal" onclick="App.toggleCategory('verbal')">📝 Verbal Ability</button>
+          <button class="category-chip" data-cat="data" onclick="App.toggleCategory('data')">📊 Data Interpretation</button>
+        </div>
+      </div>
+
+      <!-- Domain Filters -->
+      <div class="glass-card" style="margin-top: 16px;">
+        <h4 style="margin-bottom: 12px;">Include Specialization Domains <span class="text-muted" style="font-size:0.85rem;font-weight:400;">(optional)</span></h4>
+        <div class="domain-filters" id="domainFilters" style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="category-chip" data-domain="analytics" onclick="App.toggleDomain('analytics')">📈 Analytics</button>
+          <button class="category-chip" data-domain="finance" onclick="App.toggleDomain('finance')">💵 Finance</button>
+          <button class="category-chip" data-domain="operations" onclick="App.toggleDomain('operations')">⚙️ Operations</button>
+          <button class="category-chip" data-domain="marketing" onclick="App.toggleDomain('marketing')">📢 Marketing</button>
+        </div>
+        <p class="text-muted" style="font-size:0.85rem;margin-top:8px;">Selected domains will be added alongside the general aptitude questions.</p>
+      </div>
+
+      <div class="text-center" style="margin-top: 32px;">
+        <button class="btn btn-primary btn-lg" id="startTestBtn" onclick="App.startTest()" disabled>
+          🚀 Start Test
+        </button>
+        <p class="text-muted" style="font-size:0.85rem;margin-top:8px;" id="testConfigHint">Select a difficulty level to begin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VIEW: TEST ARENA ======== -->
+  <section class="view" id="view-test-arena">
+    <div class="container">
+      <div class="test-arena">
+        <!-- Question Panel -->
+        <div class="question-panel">
+          <div class="glass-card">
+            <div class="question-header">
+              <div class="question-counter">
+                Question <span id="currentQNum">1</span> of <span id="totalQNum">15</span>
+              </div>
+              <div class="question-tags" id="questionTags"></div>
+              <div class="timer-display" id="timerDisplay">
+                ⏱ <span id="timerText">20:00</span>
+              </div>
+            </div>
+
+            <div class="question-body">
+              <p class="question-text" id="questionText"></p>
+              <div class="options-list" id="optionsList"></div>
+            </div>
+
+            <div class="question-actions">
+              <div class="left-actions">
+                <button class="btn btn-ghost" id="btnPrev" onclick="App.prevQuestion()">← Previous</button>
+              </div>
+              <div class="right-actions">
+                <button class="btn btn-secondary" id="btnFlag" onclick="App.toggleFlag()">🚩 Flag</button>
+                <button class="btn btn-primary" id="btnNext" onclick="App.nextQuestion()">Next →</button>
+                <button class="btn btn-success hidden" id="btnSubmit" onclick="App.confirmSubmit()">✅ Submit Test</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="test-sidebar">
+          <div class="glass-card glass-card-sm">
+            <div class="section-title">📍 Question Navigator</div>
+            <div class="question-nav-grid" id="questionNavGrid"></div>
+            <div class="nav-legend">
+              <div class="legend-item"><div class="legend-dot current"></div> Current</div>
+              <div class="legend-item"><div class="legend-dot answered"></div> Answered</div>
+              <div class="legend-item"><div class="legend-dot flagged"></div> Flagged</div>
+              <div class="legend-item"><div class="legend-dot unanswered"></div> Unanswered</div>
+            </div>
+            <button class="btn btn-success w-full" onclick="App.confirmSubmit()">✅ Submit Test</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VIEW: RESULTS ======== -->
+  <section class="view" id="view-results">
+    <div class="container results-page">
+      <!-- Score Hero -->
+      <div class="glass-card score-hero" id="scoreHero">
+        <div class="score-circle-container">
+          <canvas id="scoreDonut"></canvas>
+          <div class="score-text-overlay">
+            <div class="score-value text-gradient" id="scoreValue">0</div>
+            <div class="score-label" id="scoreLabel">out of 0</div>
+          </div>
+        </div>
+        <h2 id="scoreMessage">Great effort!</h2>
+        <div class="score-meta" id="scoreMeta"></div>
+      </div>
+
+      <!-- Category Breakdown -->
+      <h3 style="margin-bottom: 16px;">📊 Category Breakdown</h3>
+      <div class="category-breakdown" id="categoryBreakdown"></div>
+
+      <!-- Detailed Review -->
+      <div class="glass-card" style="margin-top: 24px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <h3>📝 Detailed Question Review</h3>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost btn-sm" onclick="App.filterReview('all')" id="filterAll">All</button>
+            <button class="btn btn-ghost btn-sm" onclick="App.filterReview('wrong')" id="filterWrong">❌ Wrong</button>
+            <button class="btn btn-ghost btn-sm" onclick="App.filterReview('correct')" id="filterCorrect">✅ Correct</button>
+            <button class="btn btn-ghost btn-sm" onclick="App.filterReview('skipped')" id="filterSkipped">⬜ Skipped</button>
+          </div>
+        </div>
+        <div id="reviewQuestionsList"></div>
+      </div>
+
+      <!-- Actions -->
+      <div class="text-center" style="margin-top: 32px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary btn-lg" onclick="App.navigate('test-config')">🔄 Take Another Test</button>
+        <button class="btn btn-secondary btn-lg" onclick="App.navigate('analytics')">📊 View Analytics</button>
+        <button class="btn btn-ghost btn-lg" onclick="App.navigate('dashboard')">🏠 Dashboard</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VIEW: ANALYTICS ======== -->
+  <section class="view" id="view-analytics">
+    <div class="container analytics-page">
+      <div class="analytics-header">
+        <h2>Performance <span class="text-gradient">Analytics</span></h2>
+        <p class="text-secondary">Track your progress and identify areas for improvement.</p>
+      </div>
+
+      <!-- Summary Stats -->
+      <div class="quick-stats" style="margin-bottom:32px;">
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon purple">📝</div>
+          <div>
+            <div class="stat-value" id="analyticsTotal">0</div>
+            <div class="stat-label">Total Tests</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon blue">📈</div>
+          <div>
+            <div class="stat-value" id="analyticsAvg">0%</div>
+            <div class="stat-label">Avg Score</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon green">✅</div>
+          <div>
+            <div class="stat-value" id="analyticsCorrect">0</div>
+            <div class="stat-label">Total Correct</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon orange">📈</div>
+          <div>
+            <div class="stat-value" id="analyticsTrend">—</div>
+            <div class="stat-label">Trend</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="analytics-grid">
+        <div class="glass-card chart-card">
+          <h4>📈 Score Trend</h4>
+          <div class="chart-container">
+            <canvas id="scoreTrendChart"></canvas>
+          </div>
+        </div>
+        <div class="glass-card chart-card">
+          <h4>🎯 Category Radar</h4>
+          <div class="chart-container">
+            <canvas id="categoryRadarChart"></canvas>
+          </div>
+        </div>
+        <div class="glass-card chart-card">
+          <h4>📊 Difficulty Performance</h4>
+          <div class="chart-container">
+            <canvas id="difficultyBarChart"></canvas>
+          </div>
+        </div>
+        <div class="glass-card chart-card">
+          <h4>🔥 Topic-wise Performance</h4>
+          <div class="chart-container" id="topicHeatmap" style="overflow-y:auto;"></div>
+        </div>
+      </div>
+
+      <!-- Weak & Strong Areas -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
+        <div class="glass-card">
+          <h4 style="margin-bottom:16px;">🔻 Areas to Improve</h4>
+          <div id="weakAreasList">
+            <p class="text-muted" style="font-size:0.9rem;">Complete more tests to identify weak areas.</p>
+          </div>
+        </div>
+        <div class="glass-card">
+          <h4 style="margin-bottom:16px;">💪 Your Strengths</h4>
+          <div id="strongAreasList">
+            <p class="text-muted" style="font-size:0.9rem;">Complete more tests to identify strengths.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== VIEW: PROFILE ======== -->
+  <section class="view" id="view-profile">
+    <div class="container profile-page">
+      <div class="glass-card profile-header-card" id="profileHeaderCard">
+        <div class="profile-avatar-lg" id="profileAvatarLg"></div>
+        <div class="profile-info">
+          <h2 id="profileDisplayName">Student</h2>
+          <p class="profile-college" id="profileDisplayCollege"></p>
+          <p class="text-muted" style="font-size:0.85rem;" id="profileDisplayEmail"></p>
+          <div class="profile-targets" id="profileDisplayTargets"></div>
+        </div>
+        <button class="btn btn-secondary" onclick="App.editProfile()" style="margin-left:auto;">✏️ Edit Profile</button>
+      </div>
+
+      <!-- Profile stats -->
+      <div class="quick-stats" style="margin-bottom:24px;">
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon purple">📝</div>
+          <div>
+            <div class="stat-value" id="profileStatTests">0</div>
+            <div class="stat-label">Total Tests</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon blue">📈</div>
+          <div>
+            <div class="stat-value" id="profileStatAvg">0%</div>
+            <div class="stat-label">Average Score</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon green">⭐</div>
+          <div>
+            <div class="stat-value" id="profileStatBest">0%</div>
+            <div class="stat-label">Best Score</div>
+          </div>
+        </div>
+        <div class="glass-card glass-card-sm stat-card">
+          <div class="stat-icon orange">❓</div>
+          <div>
+            <div class="stat-value" id="profileStatQuestions">0</div>
+            <div class="stat-label">Questions Attempted</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full test history -->
+      <div class="glass-card">
+        <h3 style="margin-bottom:16px;">📋 Complete Test History</h3>
+        <div id="fullTestHistory">
+          <div class="empty-state">
+            <p>No test history yet. Take your first test!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Danger zone -->
+      <div class="glass-card" style="margin-top:24px;border-color:rgba(239,68,68,0.2);">
+        <h4 style="color:var(--error);margin-bottom:12px;">⚠️ Danger Zone</h4>
+        <p class="text-secondary" style="font-size:0.9rem;margin-bottom:16px;">These actions cannot be undone.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn btn-secondary btn-sm" onclick="App.clearTestHistory()">🗑 Clear Test History</button>
+          <button class="btn btn-danger btn-sm" onclick="App.deleteProfile()">❌ Delete Profile</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======== SUBMIT CONFIRMATION MODAL ======== -->
+<div class="modal-overlay" id="submitModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Submit Test?</h3>
+      <button class="modal-close" onclick="App.closeModal('submitModal')">×</button>
+    </div>
+    <div id="submitModalBody">
+      <p>Are you sure you want to submit your test?</p>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
+      <button class="btn btn-secondary" onclick="App.closeModal('submitModal')">Continue Test</button>
+      <button class="btn btn-success" onclick="App.submitTest()">✅ Submit</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="js/questions.js"></script>
+<script src="js/analytics.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
