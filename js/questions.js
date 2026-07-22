@@ -1102,7 +1102,6 @@ const QUESTIONS = [
     correctAnswer: 0,
     explanation: "Machine A: 200×8 = 1600, good = 1600×0.97 = 1552. Machine B: 180×8 = 1440, good = 1440×0.99 = 1425.6. Machine A produces more good units."
   },
-  },
   {
     id: 151, category: "data", difficulty: "difficult", topic: "Statistical Analysis",
     question: "Test scores: 45, 55, 60, 65, 70, 75, 80, 85, 90, 95. What is the median?",
