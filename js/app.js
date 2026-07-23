@@ -47,6 +47,14 @@ const App = {
         }
       }, 300);
     });
+
+    // Proctoring: Detect tab switch
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && this.state.currentView === 'test-arena') {
+        this.toast('Tab switch detected! Test auto-submitted for proctoring violation.', 'error');
+        this.submitTest();
+      }
+    });
   },
 
   // ---- Persistence ----
