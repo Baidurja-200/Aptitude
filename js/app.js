@@ -56,29 +56,26 @@ const App = {
       }
     });
 
-    // Proctoring: Detect copy/cut during test
+    // Proctoring: Detect copy/cut during test (lenient — warn only)
     document.addEventListener("copy", (e) => {
       if (this.state.currentView === 'test-arena') {
         e.preventDefault();
-        this.toast('⚠️ Copying is not allowed! Test auto-submitted for proctoring violation.', 'error');
-        this.submitTest();
+        this.toast('⚠️ Copying is not allowed during the test!', 'warning');
       }
     });
 
     document.addEventListener("cut", (e) => {
       if (this.state.currentView === 'test-arena') {
         e.preventDefault();
-        this.toast('⚠️ Cutting text is not allowed! Test auto-submitted for proctoring violation.', 'error');
-        this.submitTest();
+        this.toast('⚠️ Cutting text is not allowed during the test!', 'warning');
       }
     });
 
-    // Proctoring: Detect text selection during test
+    // Proctoring: Detect text selection during test (lenient — warn only)
     document.addEventListener("selectstart", (e) => {
       if (this.state.currentView === 'test-arena') {
         e.preventDefault();
-        this.toast('⚠️ Text selection is not allowed during the test! Test will be auto-submitted.', 'error');
-        this.submitTest();
+        this.toast('⚠️ Text selection is not allowed during the test!', 'warning');
       }
     });
   },
